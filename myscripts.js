@@ -6,9 +6,9 @@ class BankAccount {
     }
     balance() {
         let balance = 0;
-        this.transactions.forEach = (transaction) => {
+        this.transactions.forEach((transaction) => {
             balance += transaction.amount;
-        }
+        })
         return balance;
     }
     deposit(amt) {
@@ -21,10 +21,13 @@ class BankAccount {
     }
     charge(payee, amt) {
         this.balance();
-        let charge = new Transaction(amt, payee);
-        if ((balance + charge.amount) < 0) {
+        console.log(this.balance());
+        console.log(amt);
+        if ((this.balance() + amt) < 0) {
+            console.log("Charge not possible! Account would dip below 0")
             return "Charge not possible! Account would dip below 0";
         } else {
+            let charge = new Transaction(amt, payee);
             this.transactions.push(charge);
         }
     }
@@ -38,3 +41,5 @@ class Transaction {
         this.date = new Date();
     }
 };
+
+
