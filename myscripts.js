@@ -9,6 +9,7 @@ class BankAccount {
         this.transactions.forEach((transaction) => {
             balance += transaction.amount;
         })
+        console.log("Current balance is " + balance)
         return balance;
     }
     deposit(amt) {
@@ -16,12 +17,11 @@ class BankAccount {
             let deposit = new Transaction(amt);
             this.transactions.push(deposit);
         } else {
+            console.log("Please deposit a positive amount.")
             return "Please deposit a positive amount.";
         }
     }
     charge(payee, amt) {
-        this.balance();
-        console.log(this.balance());
         console.log(amt);
         if ((this.balance() + amt) < 0) {
             console.log("Charge not possible! Account would dip below 0")
@@ -43,3 +43,33 @@ class Transaction {
 };
 
 
+//Tests! Each of these creations will work to demonstrate that the code is correct.
+
+console.log("Please see the myscripts.js for more information!")
+
+//Creating an account
+console.log("Test 1- Account Creation")
+const tommy = new BankAccount(112345, "Tommy Oliver");
+console.log("Below you will see the account we just created for Tommy.")
+console.log(tommy);
+
+//Depositing into the account
+console.log("Test 2- Deposit");
+tommy.deposit(130);
+tommy.balance();
+
+//Cannot deposit a negative amount
+console.log("Test 3- Cannot deposit a negative amount")
+tommy.deposit(-30);
+tommy.balance();
+
+//Can take in and track charges/transactions
+console.log("Test 4- Can take in and track charges/transactions");
+tommy.charge("Wal-Mart", -30);
+tommy.balance();
+console.log(tommy.transactions);
+
+//Cannot charge an amount that would bring the balance below 0
+console.log("Test 5- Cannot charge an amount that would bring account below 0")
+tommy.charge("Target", -1000);
+tommy.balance();
